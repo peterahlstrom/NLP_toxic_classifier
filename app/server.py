@@ -8,12 +8,13 @@ from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
+from zipfile import ZipFile
 
 # export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
 # export_file_url = 'https://drive.google.com/open?id=1qUGhD2f8YyVfOxhdyUOZJIktBWAgeomy'
 # export_file_url = 'https://drive.google.com/uc?export=download&id=1-3vVyfmwXYFOYPCyLAaWwAbiaBHo1lee' #pkl-file
 # export_file_url = 'https://drive.google.com/uc?export=download&id=1Iy8wD51J2ZMndDhxoOmDr5lZCWM4lkys' #pkl-file
-export_file_url = 'https://kartor.malmo.se/test/ml/final_model.pkl'
+export_file_url = 'http://kartor.malmo.se/test/ml/model.zip'
 export_file_name = 'model.pkl'
 # export_file_name = 'boris_vs_harry.pkl'
 
@@ -38,6 +39,8 @@ async def download_file(url, dest):
 
 async def setup_learner():
     await download_file(export_file_url, path / export_file_name)
+    with ZipFile(path/'model.zip', 'r') as zip_obj:
+        await zip_obj.extractall()
     try:
         learn = load_learner(path, export_file_name)
         return learn
