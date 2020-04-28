@@ -31,7 +31,7 @@ function analyze() {
     if (this.readyState === 4) {
       console.log(e);
       var response = JSON.parse(e.target.responseText);
-      el("result").innerHTML = response;
+      el("result").innerHTML = `Result = ${response["result"]}\n(Confidence: ${response["perc"]}%`;
     }
     el("analyze-button").innerHTML = "Analyze";
   };
