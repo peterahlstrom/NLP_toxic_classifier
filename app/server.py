@@ -38,7 +38,7 @@ async def download_file(url, dest):
 
 
 async def setup_learner():
-    await download_file(export_file_url, path / export_file_name)
+    await download_file(export_file_url, path / 'model.zip')
     with ZipFile(path/'model.zip', 'r') as zip_obj:
         await zip_obj.extractall()
     try:
