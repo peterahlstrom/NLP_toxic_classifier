@@ -10,6 +10,7 @@ from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 from zipfile import ZipFile
 from pathlib import Path
+import numpy as np
 
 # export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
 # export_file_url = 'https://drive.google.com/open?id=1qUGhD2f8YyVfOxhdyUOZJIktBWAgeomy'
@@ -76,9 +77,10 @@ async def analyze(request):
     # img = open_image(BytesIO(img_bytes))
     prediction = learn.predict(text)
     print(prediction)
-    resp = JSONResponse({'result': str(prediction[0]), 'perc': str(prediction[0])})
+    percs = str([round(pred[2][i].numpy() * 100) for i in range(len(pred[2].numpy()))])
+    resp = JSONResponse({'result': str(prediction[0]), 'perc': percs})
     return resp
 
 if __name__ == '__main__':
     if 'serve' in sys.argv:
-        uvicorn.run(app=app, host='0.0.0.0', port=5000, log_level="debug")
+        uvicorn.run(app=app, host='0.0.0.0', port=5000, log_level="info")
