@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 import uvicorn
 from fastai import *
-from fastai.vision import *
+from fastai.text import *
 from io import BytesIO
 from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
@@ -12,12 +12,14 @@ from starlette.staticfiles import StaticFiles
 # export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
 # export_file_url = 'https://drive.google.com/open?id=1qUGhD2f8YyVfOxhdyUOZJIktBWAgeomy'
 # export_file_url = 'https://drive.google.com/uc?export=download&id=1-3vVyfmwXYFOYPCyLAaWwAbiaBHo1lee' #pkl-file
-export_file_url = 'https://drive.google.com/uc?export=download&id=1Iy8wD51J2ZMndDhxoOmDr5lZCWM4lkys' #pkl-file
-export_file_name = 'export.pkl'
+# export_file_url = 'https://drive.google.com/uc?export=download&id=1Iy8wD51J2ZMndDhxoOmDr5lZCWM4lkys' #pkl-file
+export_file_url = 'https://kartor.malmo.se/test/final_model.pkl'
+export_file_name = 'model.pkl'
 # export_file_name = 'boris_vs_harry.pkl'
 
 
-classes = ['setter','tollare']
+
+classes=['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
 path = Path(__file__).parent
 
 app = Starlette()
@@ -63,14 +65,11 @@ async def homepage(request):
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
     img_data = await request.form()
-    img_bytes = await (img_data['file'].read())
-    img = open_image(BytesIO(img_bytes))
-    prediction = learn.predict(img)
-    print(learn.predict(img))
-    resp = JSONResponse({'result': str(prediction[0]),
-                        'setter': "{:.1f}".format(prediction[2][0].item()*100),
-                        'tollare': "{:.1f}".format(prediction[2][1].item()*100),
-                        })
+    text = await (img_data['text'])
+    # img = open_image(BytesIO(img_bytes))
+    prediction = learn.predict(text)
+    # print(learn.predict(img))
+    resp = JSONResponse({'result': str(prediction[0])})
     return resp
 
 if __name__ == '__main__':

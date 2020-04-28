@@ -15,8 +15,9 @@ function showPicked(input) {
 }
 
 function analyze() {
-  var uploadFiles = el("file-input").files;
-  if (uploadFiles.length !== 1) alert("Please select a file to analyze!");
+  var toAnalyze = el("analyze-text").value;
+  console.log(toAnalyze)
+  // if (uploadFiles.length !== 1) alert("Please select a file to analyze!");
 
   el("analyze-button").innerHTML = "Analyzing...";
   var xhr = new XMLHttpRequest();
@@ -29,13 +30,13 @@ function analyze() {
   xhr.onload = function(e) {
     if (this.readyState === 4) {
       var response = JSON.parse(e.target.responseText);
-      el("result-label").innerHTML = `Result = ${response["result"]}\n(Tollare: ${response["tollare"]}%, Setter: ${response['setter']}%)`;
+      el("result").innerHTML = response;
     }
     el("analyze-button").innerHTML = "Analyze";
   };
 
   var fileData = new FormData();
-  fileData.append("file", uploadFiles[0]);
+  fileData.append("text", toAnalyze);
   xhr.send(fileData);
 }
 
