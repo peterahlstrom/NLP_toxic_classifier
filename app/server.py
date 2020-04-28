@@ -77,7 +77,7 @@ async def analyze(request):
     # img = open_image(BytesIO(img_bytes))
     prediction = learn.predict(text)
     print(prediction)
-    percs = str([round(pred[2][i].numpy() * 100) for i in range(len(pred[2].numpy()))])
+    percs = str([round(prediction[2][i].numpy() * 100) for i in range(len(prediction[2].numpy()))])
     resp = JSONResponse({'result': str(prediction[0]), 'perc': percs})
     return resp
 
