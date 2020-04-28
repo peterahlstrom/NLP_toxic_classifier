@@ -13,7 +13,7 @@ from starlette.staticfiles import StaticFiles
 # export_file_url = 'https://drive.google.com/open?id=1qUGhD2f8YyVfOxhdyUOZJIktBWAgeomy'
 # export_file_url = 'https://drive.google.com/uc?export=download&id=1-3vVyfmwXYFOYPCyLAaWwAbiaBHo1lee' #pkl-file
 # export_file_url = 'https://drive.google.com/uc?export=download&id=1Iy8wD51J2ZMndDhxoOmDr5lZCWM4lkys' #pkl-file
-export_file_url = 'https://kartor.malmo.se/test/final_model.pkl'
+export_file_url = 'https://kartor.malmo.se/test/ml/final_model.pkl'
 export_file_name = 'model.pkl'
 # export_file_name = 'boris_vs_harry.pkl'
 
