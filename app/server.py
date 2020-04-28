@@ -9,6 +9,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 from zipfile import ZipFile
+from pathlib import Path
 
 # export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
 # export_file_url = 'https://drive.google.com/open?id=1qUGhD2f8YyVfOxhdyUOZJIktBWAgeomy'
@@ -39,13 +40,14 @@ async def download_file(url, dest):
 
 async def setup_learner():
     await download_file(export_file_url, path / 'model.zip')
+    print()
+    with ZipFile(path/'model.zip', 'r') as zip_obj:
+        zip_obj.extractall(path=path)
+
     
     try:
-        with ZipFile(path/'model.zip', 'r') as zip_obj:
-            zip_obj.extractall()
-            path.ls()
-            learn = load_learner(path, export_file_name)
-            return learn
+        learn = load_learner(path, export_file_name)
+        return learn
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
             print(e)
