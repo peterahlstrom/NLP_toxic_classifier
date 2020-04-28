@@ -29,6 +29,7 @@ function analyze() {
   };
   xhr.onload = function(e) {
     if (this.readyState === 4) {
+      console.log(e);
       var response = JSON.parse(e.target.responseText);
       el("result").innerHTML = response;
     }
