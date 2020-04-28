@@ -43,8 +43,8 @@ async def setup_learner():
     try:
         with ZipFile(path/'model.zip', 'r') as zip_obj:
             zip_obj.extractall()
-        learn = load_learner(path, export_file_name)
-        return learn
+            learn = load_learner(path, export_file_name)
+            return learn
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
             print(e)
