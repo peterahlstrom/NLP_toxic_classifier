@@ -15,7 +15,7 @@ from zipfile import ZipFile
 # export_file_url = 'https://drive.google.com/uc?export=download&id=1-3vVyfmwXYFOYPCyLAaWwAbiaBHo1lee' #pkl-file
 # export_file_url = 'https://drive.google.com/uc?export=download&id=1Iy8wD51J2ZMndDhxoOmDr5lZCWM4lkys' #pkl-file
 export_file_url = 'http://kartor.malmo.se/test/ml/model.zip'
-export_file_name = 'model.pkl'
+export_file_name = 'final_model.pkl'
 # export_file_name = 'boris_vs_harry.pkl'
 
 
@@ -43,6 +43,7 @@ async def setup_learner():
     try:
         with ZipFile(path/'model.zip', 'r') as zip_obj:
             zip_obj.extractall()
+            path.ls()
             learn = load_learner(path, export_file_name)
             return learn
     except RuntimeError as e:
