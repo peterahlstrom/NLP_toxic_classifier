@@ -39,9 +39,10 @@ async def download_file(url, dest):
 
 async def setup_learner():
     await download_file(export_file_url, path / 'model.zip')
-    with ZipFile(path/'model.zip', 'r') as zip_obj:
-        await zip_obj.extractall()
+    
     try:
+        with ZipFile(path/'model.zip', 'r') as zip_obj:
+            zip_obj.extractall()
         learn = load_learner(path, export_file_name)
         return learn
     except RuntimeError as e:
