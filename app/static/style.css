@@ -63,7 +63,13 @@ button:focus {
 }
 
 #footer {
-   position:absolute;
-   bottom:0;
-   width: 100%;
+    position: static;
+    bottom: 0;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+small {
+    width:50%;
 }
