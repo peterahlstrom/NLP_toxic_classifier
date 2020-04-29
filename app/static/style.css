@@ -2,9 +2,9 @@ body {
     background-color: #fff;
 }
 
-/*#result {
+#result {
     width: 60%;
-}*/
+}
 
 .no-display {
     display: none;
@@ -15,7 +15,6 @@ body {
     padding: 10px 50px;
     text-align: center;
     font-size: 14px;
-    width: 60%;
 }
 
 .title {
@@ -27,6 +26,7 @@ body {
 
 .content {
     margin-top: 6em;
+    width: 60%;
 }
 
 .analyze {

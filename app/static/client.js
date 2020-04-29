@@ -63,8 +63,10 @@ function analyze() {
   var self = this;
   var toAnalyze = el("analyze-text").value;
   console.log(toAnalyze)
-  // var resp = {'result': ['toxic', 'severe_toxic', 'obscene'], 'perc': [50, 40, 20, 10, 70, 60]}
-  // return false;
+  var classes = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+  var response = {'result': ['toxic', 'severe_toxic', 'obscene'], 'perc': [50, 40, 20, 10, 70, 60]}
+  self.showChart(response['perc'], classes);
+  return false;
   // if (uploadFiles.length !== 1) alert("Please select a file to analyze!");
 
   el("analyze-button").innerHTML = "Analyzing...";
