@@ -1,5 +1,8 @@
 var el = x => document.getElementById(x);
 
+
+var ctx = document.getElementById('chart').getContext('2d');
+
 function showPicker() {
   el("file-input").click();
 }
@@ -14,9 +17,54 @@ function showPicked(input) {
   reader.readAsDataURL(input.files[0]);
 }
 
+function showChart(chartData, labels) {
+  var options = {scales: {
+                  yAxes:[{
+                    ticks: {
+                      beginAtZero: true,
+                      max: 100,
+                    }
+                  }]
+                }
+              }
+
+  var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: chartData,
+        label: '%',
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+    }]
+
+    },
+    options: options
+});
+}
+
 function analyze() {
+  var self = this;
   var toAnalyze = el("analyze-text").value;
   console.log(toAnalyze)
+  // var resp = {'result': ['toxic', 'severe_toxic', 'obscene'], 'perc': [50, 40, 20, 10, 70, 60]}
+  // return false;
   // if (uploadFiles.length !== 1) alert("Please select a file to analyze!");
 
   el("analyze-button").innerHTML = "Analyzing...";
@@ -29,9 +77,12 @@ function analyze() {
   };
   xhr.onload = function(e) {
     if (this.readyState === 4) {
+      var classes = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
       console.log(e);
       var response = JSON.parse(e.target.responseText);
-      el("result").innerHTML = `Result = ${response["result"]}\n(Confidence: ${response["perc"]}%`;
+
+      self.showChart(response['perc'], classes);
+      // el("result").innerHTML = `Result = ${response["result"]}\n(Confidence: ${response["perc"]}%`;
     }
     el("analyze-button").innerHTML = "Analyze";
   };

@@ -2,6 +2,10 @@ body {
     background-color: #fff;
 }
 
+#result {
+    width: 60%;
+}
+
 .no-display {
     display: none;
 }
