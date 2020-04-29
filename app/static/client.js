@@ -3,19 +3,11 @@ var el = x => document.getElementById(x);
 
 var ctx = document.getElementById('chart').getContext('2d');
 
-function showPicker() {
-  el("file-input").click();
-}
-
-function showPicked(input) {
-  el("upload-label").innerHTML = input.files[0].name;
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    el("image-picked").src = e.target.result;
-    el("image-picked").className = "";
-  };
-  reader.readAsDataURL(input.files[0]);
-}
+form = el('form')
+form.addEventListener('submit', function(e) {
+    analyze();
+    e.preventDefault();
+}, false);
 
 function showChart(chartData, labels) {
   var options = {scales: {
@@ -62,11 +54,11 @@ function showChart(chartData, labels) {
 function analyze() {
   var self = this;
   var toAnalyze = el("analyze-text").value;
-  console.log(toAnalyze)
-  var classes = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
-  var response = {'result': ['toxic', 'severe_toxic', 'obscene'], 'perc': [50, 40, 20, 10, 70, 60]}
-  self.showChart(response['perc'], classes);
-  return false;
+  // console.log(toAnalyze)
+  // var classes = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+  // var response = {'result': ['toxic', 'severe_toxic', 'obscene'], 'perc': [50, 40, 20, 10, 70, 60]}
+  // self.showChart(response['perc'], classes);
+  // return false;
   // if (uploadFiles.length !== 1) alert("Please select a file to analyze!");
 
   el("analyze-button").innerHTML = "Analyzing...";
