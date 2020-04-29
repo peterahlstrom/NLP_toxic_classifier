@@ -2,9 +2,9 @@ body {
     background-color: #fff;
 }
 
-#result {
+/*#result {
     width: 60%;
-}
+}*/
 
 .no-display {
     display: none;
@@ -15,6 +15,7 @@ body {
     padding: 10px 50px;
     text-align: center;
     font-size: 14px;
+    width: 60%;
 }
 
 .title {
@@ -25,7 +26,7 @@ body {
 }
 
 .content {
-    margin-top: 10em;
+    margin-top: 6em;
 }
 
 .analyze {
@@ -53,14 +54,8 @@ button.choose-file-button {
     color: #7052CB;
 }
 
-button.analyze-button {
-    width: 200px;
-    height: 40px;
-    border: solid 1px #7052CB;
-    border-radius: 2px;
-    background-color: #7052CB;
-    font-size: 13px;
-    color: #ffffff;
+#analyze-button {
+    margin: 1em;
 }
 
 button:focus {

@@ -7,22 +7,22 @@
 <body>
 <div>
   <div class='center'>
-    <div class='title'>Should I be insulted?</div>
+    <div class='title'><h1>Should I be insulted?</h1></div>
     <p>
-      Did someone say a mean thing to you on the Internet? Should you be offended, hurt and sad? Paste the comment here and find out!
+      Did someone say a mean thing to you on the Internet? Should you be offended, hurt and sad?<br>Paste the comment here and find out!
     </p>
     <div class='content'>
-      <form>
+      <form autocomplete="off">
           <div class="form-group">
 
-    <input type="textarea" class="form-control" id="analyze-text" name="analyze-text" placeholder="Enter text here...">
+    <input type="textarea" class="form-control" id="analyze-text" name="analyze-text" placeholder="Enter text here..." autofocus>
 
         <button id='analyze-button' class='btn btn-primary' type='button' onclick='analyze()'>Analyze</button>
   </div>
 
       </form>
     </div>
-    <div class="center" id="result" style="width: 60%">
+    <div class="center" id="result">
       <canvas id="chart"></canvas>
     </div>
 
